@@ -15,11 +15,18 @@ import android.widget.Toast;
 
 //import com.google.android.gms.tasks.OnCompleteListener;
 //import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 //import com.google.firebase.auth.AuthResult;
 //import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 //import java.util.HashMap;
 //import java.util.Map;
@@ -41,13 +48,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String password = "";
 
 
-    private DatabaseReference database;
+    FirebaseAuth mAuth;
+     DatabaseReference database;
     //private FirebaseDatabase firebaseDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
 
         edtidUsuario= findViewById(R.id.edtidUsuario);
         edtApellido= findViewById(R.id.edtApellido);
@@ -61,14 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegistrar= findViewById(R.id.btnregistrar);
         FirebaseDatabase database= FirebaseDatabase.getInstance();
         btnRegistrar.setOnClickListener(this);
-        inicializarFirebase();
+
 
     }
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(MainActivity.this);
-        //firebaseDatabase=FirebaseDatabase.getInstance();
-        //FirebaseDatabase=firebaseDatabase.getReference();
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -76,23 +84,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void registrarUsuario(){
-        String idusuario = edtidUsuario.getText().toString();
-        String apellido = edtApellido.getText().toString();
-        String nombre = edtnombre.getText().toString();
-        String direccion = edtdireccion.getText().toString();
-        String nacionalidad = edtNacionalidad.getText().toString();
-        String fechanac = edtfechaNac.getText().toString();
-        String telefono = edtTelefono.getText().toString();
-        String email = edtemail.getText().toString();
-        String password = edtContrasenia.getText().toString();
+        final String idusuario = edtidUsuario.getText().toString();
+        final String apellido = edtApellido.getText().toString();
+        final String nombre = edtnombre.getText().toString();
+        final String direccion = edtdireccion.getText().toString();
+        final String nacionalidad = edtNacionalidad.getText().toString();
+        final String fechanac = edtfechaNac.getText().toString();
+        final String telefono = edtTelefono.getText().toString();
+        final String email = edtemail.getText().toString();
+        final String password = edtContrasenia.getText().toString();
         System.out.println("guardado");
 
         if (!TextUtils.isEmpty(idusuario) && !TextUtils.isEmpty(apellido)  && !TextUtils.isEmpty(nombre)  && !TextUtils.isEmpty(direccion)  && !TextUtils.isEmpty(nacionalidad)
                 && !TextUtils.isEmpty(fechanac)  && !TextUtils.isEmpty(telefono)  && !TextUtils.isEmpty(email)  && !TextUtils.isEmpty(password)) {
-            String id = database.push().getKey();                  // Para obtener el valor más alto y obtengo el valor clave
-            Usuario usuario = new Usuario (idusuario,apellido,nombre,direccion, nacionalidad, fechanac, telefono, email, password);
-            database.child("Usuario").child(id).setValue(usuario);
+           mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+               @Override
+               public void onComplete(@NonNull Task<AuthResult> task) {
+                   if(task.isSuccessful()){
+                       Map<String, Object> map = new HashMap<>();
+                       map.put("idusuario", idusuario);
+                       map.put("apellido", apellido);
+                       map.put("nombre", nombre);
+                       map.put("direccion", direccion);
+                       map.put("nacionalidad", nacionalidad);
+                       map.put("fechanac", fechanac);
+                       map.put("telefono", telefono);
+                       map.put("email", email);
+                       map.put("password", password);
+                       String id = mAuth.getCurrentUser().getUid();
+                       database.child("usuario").child(id).setValue(map)
+                               .addOnCompleteListener(new OnCompleteListener<Void>() {//validacion
+                           @Override
+                           public void onComplete(@NonNull Task<Void> task2) {
+                               if(task2.isSuccessful()){
+                                   startActivity(new Intent(MainActivity.this, PerfilActivity.class));
+                                   System.out.println("perfilactivity pasar");
+                                   finish();
+                               }else{
+                                   Toast.makeText(MainActivity.this, "no se crearon los datos correctamente", Toast.LENGTH_SHORT).show();
+                               }
+                           }
+                       });
+                   }
+               }
+           });
+
             Toast.makeText(MainActivity.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, PerfilActivity.class));
+            finish();
         }
         else Toast.makeText(MainActivity.this, "Debe completar los campos", Toast.LENGTH_SHORT).show();
     }
