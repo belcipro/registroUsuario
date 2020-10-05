@@ -105,6 +105,7 @@
             android:background="#00BCD4"
             android:ems="5"
             android:gravity="center"
+
             android:text="Registrar Usuario" />
 
       </LinearLayout>
