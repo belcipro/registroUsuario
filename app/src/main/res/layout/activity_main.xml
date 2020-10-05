@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradiente"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#040303"
+        android:text="Registrar Usuario"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/edtidUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:inputType="textPersonName|textNoSuggestions"
+
+        android:hint="ID Usuario" />
+
+    <EditText
+        android:id="@+id/edtApellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:inputType="textPersonName|textNoSuggestions"
+        android:hint="Apellidos" />
+
+    <EditText
+        android:id="@+id/edtNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:inputType="textPersonName|textNoSuggestions"
+        android:hint="Nombre" />
+
+    <EditText
+        android:id="@+id/edtDirec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:inputType="textPersonName|textNoSuggestions"
+        android:hint="Dirección" />
+
+    <EditText
+        android:id="@+id/edtfechaNac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:inputType="date|textNoSuggestions"
+        android:hint="Fecha de Nacimiento"/>
+
+    <EditText
+        android:id="@+id/edtNacionalidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:inputType="textPersonName|textNoSuggestions"
+        android:hint="Nacionalidad" />
+
+    <EditText
+        android:id="@+id/edtTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:inputType="textPersonName|textNoSuggestions"
+        android:hint="Telefono" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress|textNoSuggestions"
+        android:hint="Email"/>
+
+    <EditText
+        android:id="@+id/edtpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword|textNoSuggestions"
+        android:hint="Contraseña"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnregistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00BCD4"
+            android:ems="5"
+            android:gravity="center"
+            android:text="Registrar Usuario" />
+
+      </LinearLayout>
+
+</LinearLayout>

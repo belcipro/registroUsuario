@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "15821283516",
+    "firebase_url": "https://registrousuario-c7de2.firebaseio.com",
+    "project_id": "registrousuario-c7de2",
+    "storage_bucket": "registrousuario-c7de2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15821283516:android:93f1cc4e262af856a5f0b9",
+        "android_client_info": {
+          "package_name": "edu.continental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15821283516-r6lmtjdd79b3frjihao42r79kl207b68.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.continental",
+            "certificate_hash": "5b7bfcf0bebc81ee8a7a844dbc1f91bd282195cc"
+          }
+        },
+        {
+          "client_id": "15821283516-8ekd0o8eibdb5jrf16a1tv37ptf98c12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVWF9rw6ywbvBxn8Vje3hMj7wGOJ7F9CI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15821283516-8ekd0o8eibdb5jrf16a1tv37ptf98c12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
